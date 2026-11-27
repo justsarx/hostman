@@ -19,7 +19,7 @@ export function HistoryPanel({ history, onReopenRequest, onClearHistory }: Histo
           <button
             type="button"
             onClick={onClearHistory}
-            className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-rack-muted hover:border-rose-500/50 hover:text-rose-400"
+            className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-rack-muted hover:border-rack-err/50 hover:text-rack-err"
           >
             <Trash size={11} />
             Clear History
@@ -59,7 +59,7 @@ export function HistoryPanel({ history, onReopenRequest, onClearHistory }: Histo
 
                     <div className="tabular-nums flex items-center gap-1.5 font-mono text-[10px]">
                       {responseMeta.errorType ? (
-                        <span className="rounded-[2px] border border-rose-500/40 bg-rose-500/10 px-1 text-rose-400 uppercase">
+                        <span className="rounded-[2px] border border-rack-err/40 bg-rack-err/10 px-1 text-rack-err uppercase">
                           {responseMeta.errorType}
                         </span>
                       ) : (

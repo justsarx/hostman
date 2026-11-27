@@ -189,7 +189,7 @@ export function RequestPane({
               autoComplete="off"
               className={`h-9 min-w-0 flex-1 rounded-[2px] border bg-rack-elevated px-3 font-mono text-xs text-rack-text placeholder:text-rack-dim focus:outline-none ${
                 urlError
-                  ? 'border-rose-500 bg-rose-500/5'
+                  ? 'border-rack-err bg-rack-err/5'
                   : 'border-rack-border focus:border-rack-accent'
               }`}
             />
@@ -198,7 +198,7 @@ export function RequestPane({
           {isLoading ? (
             <button
               type="submit"
-              className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-[2px] border border-rose-500 bg-rose-600/20 px-4 font-mono text-xs font-semibold uppercase tracking-wider text-rose-300 hover:bg-rose-600/30"
+              className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-[2px] border border-rack-err bg-rack-err/15 px-4 font-mono text-xs font-semibold uppercase tracking-wider text-rack-err hover:bg-rack-err/25"
             >
               <Stop size={14} weight="fill" />
               Cancel
@@ -206,7 +206,7 @@ export function RequestPane({
           ) : (
             <button
               type="submit"
-              className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-5 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+              className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-5 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
             >
               <PaperPlaneTilt size={14} weight="bold" />
               Send
@@ -215,7 +215,7 @@ export function RequestPane({
         </div>
 
         {urlError ? (
-          <p id="request-url-error" className="font-mono text-[11px] text-rose-400">
+          <p id="request-url-error" className="font-mono text-[11px] text-rack-err">
             Error: {urlError}
           </p>
         ) : null}
@@ -231,14 +231,14 @@ export function RequestPane({
         {unresolvedVars.length > 0 ? (
           <div
             role="status"
-            className="flex flex-wrap items-center gap-1.5 rounded-[2px] border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 font-mono text-[11px] text-amber-300"
+            className="flex flex-wrap items-center gap-1.5 rounded-[2px] border border-rack-warn/40 bg-rack-warn/10 px-2.5 py-1 font-mono text-[11px] text-rack-warn"
           >
             <Warning size={13} weight="bold" className="shrink-0" />
             <span>Unresolved environment variables:</span>
             {unresolvedVars.map((varName) => (
               <code
                 key={varName}
-                className="rounded-[2px] border border-amber-500/40 bg-rack-canvas px-1 py-0.5 text-[10px] text-amber-200"
+                className="rounded-[2px] border border-rack-warn/40 bg-rack-canvas px-1 py-0.5 text-[10px] text-rack-warn"
               >
                 {`{{${varName}}}`}
               </code>
@@ -369,7 +369,7 @@ export function RequestPane({
             </div>
 
             {bodyDisabledForMethod ? (
-              <div className="border border-rack-border bg-rack-canvas px-3 py-2 font-mono text-xs text-amber-300">
+              <div className="border border-rack-border bg-rack-canvas px-3 py-2 font-mono text-xs text-rack-warn">
                 {request.method} requests do not transmit a body payload.
               </div>
             ) : null}
@@ -377,7 +377,7 @@ export function RequestPane({
             {jsonError ? (
               <div
                 role="alert"
-                className="border border-rose-500/50 bg-rose-500/10 px-3 py-1.5 font-mono text-xs text-rose-300"
+                className="border border-rack-err/50 bg-rack-err/10 px-3 py-1.5 font-mono text-xs text-rack-err"
               >
                 JSON Syntax Error: {jsonError}
               </div>

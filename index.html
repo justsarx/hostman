@@ -1,10 +1,19 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      try {
+        var s = localStorage.getItem('color-scheme');
+        if (s === 'light' || s === 'dark') {
+          document.querySelector('meta[name="color-scheme"]').setAttribute('content', s);
+        }
+      } catch (e) {}
+    </script>
+    <meta name="theme-color" content="#F3F3F5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <link rel="apple-touch-icon" href="%BASE_URL%pwa-192x192.png" />
     <title>Hostman — Offline-First API Client</title>
@@ -15,7 +24,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#000000] text-[#F4F4F5] font-sans antialiased selection:bg-[#FF5722]/30 selection:text-white">
+  <body class="bg-rack-canvas text-rack-text font-sans antialiased selection:bg-rack-accent/25 selection:text-rack-text">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

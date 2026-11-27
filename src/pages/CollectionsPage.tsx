@@ -74,7 +74,7 @@ export function CollectionsPage() {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="inline-flex h-8 items-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+            className="inline-flex h-8 items-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
           >
             Back to Workbench
           </button>
@@ -147,7 +147,7 @@ export function CollectionsPage() {
               </button>
             </div>
             {colError ? (
-              <span id="page-new-col-error" className="font-mono text-[11px] text-rose-400">
+              <span id="page-new-col-error" className="font-mono text-[11px] text-rack-err">
                 Error: {colError}
               </span>
             ) : null}
@@ -188,7 +188,7 @@ export function CollectionsPage() {
                           type="button"
                           onClick={() => deleteCollection(col.id)}
                           aria-label={`Delete collection ${col.name}`}
-                          className="inline-flex h-6 items-center gap-1 rounded-[2px] border border-rack-border bg-rack-canvas px-2 font-mono text-[10px] uppercase text-rack-dim hover:border-rose-500/50 hover:text-rose-400"
+                          className="inline-flex h-6 items-center gap-1 rounded-[2px] border border-rack-border bg-rack-canvas px-2 font-mono text-[10px] uppercase text-rack-dim hover:border-rack-err/50 hover:text-rack-err"
                         >
                           <Trash size={12} />
                           Delete
@@ -225,7 +225,7 @@ export function CollectionsPage() {
                                     openSavedRequest(req);
                                     navigate('/');
                                   }}
-                                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent/60 bg-rack-accent/10 px-2 font-mono text-[10px] font-semibold uppercase text-rack-accent hover:bg-rack-accent hover:text-black"
+                                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent/60 bg-rack-accent/10 px-2 font-mono text-[10px] font-semibold uppercase text-rack-accent hover:bg-rack-accent hover:text-rack-onAccent"
                                 >
                                   <ArrowSquareOut size={12} weight="bold" />
                                   Open
@@ -242,7 +242,7 @@ export function CollectionsPage() {
                                   type="button"
                                   onClick={() => deleteSavedRequest(req.id)}
                                   aria-label={`Delete ${req.name}`}
-                                  className="inline-flex h-7 w-7 items-center justify-center rounded-[2px] border border-rack-border bg-rack-elevated text-rack-muted hover:text-rose-400"
+                                  className="inline-flex h-7 w-7 items-center justify-center rounded-[2px] border border-rack-border bg-rack-elevated text-rack-muted hover:text-rack-err"
                                 >
                                   <Trash size={13} />
                                 </button>
@@ -269,7 +269,7 @@ export function CollectionsPage() {
                 <button
                   type="button"
                   onClick={clearHistory}
-                  className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 font-mono text-[10px] uppercase text-rack-muted hover:border-rose-500/50 hover:text-rose-400"
+                  className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 font-mono text-[10px] uppercase text-rack-muted hover:border-rack-err/50 hover:text-rack-err"
                 >
                   <Trash size={11} />
                   Clear

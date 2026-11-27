@@ -11,7 +11,7 @@ export function StatusBar({ isOnline, activeEnvironmentName }: StatusBarProps) {
       <div className="flex items-center gap-3">
         <span
           className={`inline-flex items-center gap-1.5 font-medium ${
-            isOnline ? 'text-emerald-400' : 'text-amber-400'
+            isOnline ? 'text-rack-ok' : 'text-rack-warn'
           }`}
         >
           {isOnline ? <WifiHigh size={13} weight="bold" /> : <WifiSlash size={13} weight="bold" />}

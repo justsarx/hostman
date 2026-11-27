@@ -107,7 +107,7 @@ export function CollectionsPanel({
           <button
             type="submit"
             aria-label="Create collection"
-            className="inline-flex h-6 w-6 items-center justify-center text-emerald-400 hover:bg-rack-elevated"
+            className="inline-flex h-6 w-6 items-center justify-center text-rack-ok hover:bg-rack-elevated"
           >
             <Check size={13} weight="bold" />
           </button>
@@ -154,7 +154,7 @@ export function CollectionsPanel({
                       <button
                         type="submit"
                         aria-label="Save collection name"
-                        className="p-0.5 text-emerald-400"
+                        className="p-0.5 text-rack-ok"
                       >
                         <Check size={12} weight="bold" />
                       </button>
@@ -202,7 +202,7 @@ export function CollectionsPanel({
                           type="button"
                           onClick={() => onDeleteCollection(collection.id)}
                           aria-label={`Delete ${collection.name}`}
-                          className="inline-flex h-5 w-5 items-center justify-center rounded-[2px] text-rack-dim hover:bg-rack-canvas hover:text-rose-400"
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-[2px] text-rack-dim hover:bg-rack-canvas hover:text-rack-err"
                         >
                           <Trash size={12} />
                         </button>
@@ -261,7 +261,7 @@ export function CollectionsPanel({
                                 type="button"
                                 onClick={() => onDeleteRequest(req.id)}
                                 aria-label={`Delete ${req.name}`}
-                                className="inline-flex h-5 w-5 items-center justify-center rounded-[2px] text-rack-dim hover:bg-rack-elevated hover:text-rose-400"
+                                className="inline-flex h-5 w-5 items-center justify-center rounded-[2px] text-rack-dim hover:bg-rack-elevated hover:text-rack-err"
                               >
                                 <Trash size={12} />
                               </button>

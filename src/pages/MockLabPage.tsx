@@ -66,7 +66,7 @@ export function MockLabPage() {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="inline-flex h-8 items-center rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+            className="inline-flex h-8 items-center rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
           >
             Back to Workbench
           </button>
@@ -158,7 +158,7 @@ export function MockLabPage() {
                 <button
                   type="button"
                   onClick={handleSimulate}
-                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent bg-rack-accent px-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent bg-rack-accent px-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
                 >
                   <Play size={11} weight="fill" />
                   Simulate

@@ -79,7 +79,7 @@ export function ResponsePane({ response, isLoading, diagnosticSlot }: ResponsePa
           ) : null}
 
           {response?.errorType ? (
-            <span className="rounded-[2px] border border-rose-500/50 bg-rose-500/10 px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase text-rose-400">
+            <span className="rounded-[2px] border border-rack-err/50 bg-rack-err/10 px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase text-rack-err">
               {response.errorType}
             </span>
           ) : null}
@@ -91,7 +91,7 @@ export function ResponsePane({ response, isLoading, diagnosticSlot }: ResponsePa
             onClick={handleCopy}
             className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-elevated px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-rack-muted hover:border-rack-borderStrong hover:text-rack-text"
           >
-            {copied ? <Check size={13} weight="bold" className="text-emerald-400" /> : <Copy size={13} />}
+            {copied ? <Check size={13} weight="bold" className="text-rack-ok" /> : <Copy size={13} />}
             {copied ? 'Copied' : 'Copy'}
           </button>
         ) : null}
@@ -162,7 +162,7 @@ export function ResponsePane({ response, isLoading, diagnosticSlot }: ResponsePa
           </div>
         ) : response.errorType ? (
           diagnosticSlot ?? (
-            <div className="border border-rose-500/40 bg-rose-500/10 p-3 font-mono text-xs text-rose-300">
+            <div className="border border-rack-err/40 bg-rack-err/10 p-3 font-mono text-xs text-rack-err">
               {response.errorMessage || 'Request failed.'}
             </div>
           )

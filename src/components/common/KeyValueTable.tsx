@@ -112,7 +112,7 @@ export function KeyValueTable({
                       type="button"
                       onClick={() => handleDelete(item.id)}
                       aria-label={`Delete row ${idx + 1}`}
-                      className="inline-flex h-7 w-full items-center justify-center text-rack-dim hover:bg-rack-elevated hover:text-rose-400"
+                      className="inline-flex h-7 w-full items-center justify-center text-rack-dim hover:bg-rack-elevated hover:text-rack-err"
                     >
                       <Trash size={14} weight="regular" />
                     </button>

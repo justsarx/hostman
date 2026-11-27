@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { Flask, FolderSimple, SlidersHorizontal, TerminalWindow } from '@phosphor-icons/react';
+import { Flask, FolderSimple, Moon, SlidersHorizontal, Sun, TerminalWindow } from '@phosphor-icons/react';
 import { useWorkspace } from '../../context/useWorkspace';
+import { useColorScheme } from '../../hooks/useColorScheme';
 
 export function TopNav() {
   const { tabs, savedRequests, environments, activeEnvironment } = useWorkspace();
+  const { resolvedScheme, toggleScheme } = useColorScheme();
 
   const navItems = [
     {
@@ -36,8 +38,10 @@ export function TopNav() {
     },
   ];
 
+  const nextSchemeLabel = resolvedScheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
   return (
-    <header className="flex h-10 shrink-0 items-center justify-between border-b border-rack-border bg-rack-canvas px-3">
+    <header className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-rack-border bg-rack-canvas px-3">
       <div className="flex min-w-0 items-center gap-3 overflow-x-auto">
         <NavLink to="/" className="flex shrink-0 items-center gap-2 pr-2">
           <span className="inline-block h-2 w-2 bg-rack-accent" aria-hidden="true" />
@@ -76,11 +80,32 @@ export function TopNav() {
         </nav>
       </div>
 
-      <div className="hidden shrink-0 items-center gap-2 font-mono text-[10px] text-rack-muted lg:flex">
-        <span className="text-rack-dim">ACTIVE ENV:</span>
-        <span className="rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 text-rack-text">
-          {activeEnvironment?.name ?? 'NONE'}
-        </span>
+      <div className="flex shrink-0 items-center gap-2">
+        <div className="hidden items-center gap-2 font-mono text-[10px] text-rack-muted lg:flex">
+          <span className="text-rack-dim">ACTIVE ENV:</span>
+          <span className="rounded-[2px] border border-rack-border bg-rack-elevated px-2 py-0.5 text-rack-text">
+            {activeEnvironment?.name ?? 'NONE'}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={toggleScheme}
+          aria-label={nextSchemeLabel}
+          className="inline-flex h-7 items-center gap-1.5 rounded-[2px] border border-rack-border bg-rack-elevated px-2 font-mono text-[10px] uppercase tracking-wider text-rack-muted hover:border-rack-borderStrong hover:text-rack-text"
+        >
+          {resolvedScheme === 'dark' ? (
+            <>
+              <Sun size={13} weight="bold" aria-hidden="true" />
+              <span className="hidden sm:inline">Light</span>
+            </>
+          ) : (
+            <>
+              <Moon size={13} weight="bold" aria-hidden="true" />
+              <span className="hidden sm:inline">Dark</span>
+            </>
+          )}
+        </button>
       </div>
     </header>
   );

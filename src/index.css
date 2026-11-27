@@ -3,18 +3,98 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
-  --rack-canvas: #000000;
-  --rack-surface: #0b0b0c;
-  --rack-elevated: #141416;
-  --rack-border: #222225;
-  --rack-accent: #ff5722;
-  --rack-scrollbar-track: #0b0b0c;
-  --rack-scrollbar-thumb: #2b2b30;
+  color-scheme: light dark;
+
+  /* Light Hardware Rack Tokens (Brushed Aluminum & Paper) */
+  --rack-canvas-rgb: 243 243 245;
+  --rack-surface-rgb: 255 255 255;
+  --rack-elevated-rgb: 233 233 237;
+  --rack-hover-rgb: 222 222 228;
+  --rack-border-rgb: 200 200 208;
+  --rack-border-strong-rgb: 148 148 160;
+  --rack-accent-rgb: 201 59 11;
+  --rack-accent-hover-rgb: 180 50 8;
+  --rack-on-accent: #ffffff;
+  --rack-text-rgb: 18 18 21;
+  --rack-muted-rgb: 74 74 84;
+  --rack-dim-rgb: 98 98 110;
+  --rack-ok-rgb: 4 120 87;
+  --rack-warn-rgb: 180 83 9;
+  --rack-err-rgb: 190 18 60;
+  --rack-info-rgb: 3 105 161;
+  --rack-patch-rgb: 109 40 217;
+  --rack-opt-rgb: 14 116 144;
+  --rack-neutral-rgb: 63 63 70;
+
+  --rack-accent: #c93b0b;
+  --rack-scrollbar-track: #e9e9ed;
+  --rack-scrollbar-thumb: #a8a8b2;
+  --rack-backdrop: rgba(18, 18, 21, 0.52);
 
   accent-color: var(--rack-accent);
   scrollbar-color: var(--rack-scrollbar-thumb) var(--rack-scrollbar-track);
   scrollbar-width: thin;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name='color-scheme'][content='light'])) {
+    --rack-canvas-rgb: 0 0 0;
+    --rack-surface-rgb: 11 11 12;
+    --rack-elevated-rgb: 20 20 22;
+    --rack-hover-rgb: 27 27 30;
+    --rack-border-rgb: 34 34 37;
+    --rack-border-strong-rgb: 52 52 58;
+    --rack-accent-rgb: 255 87 34;
+    --rack-accent-hover-rgb: 255 110 64;
+    --rack-on-accent: #000000;
+    --rack-text-rgb: 244 244 245;
+    --rack-muted-rgb: 148 148 156;
+    --rack-dim-rgb: 92 92 100;
+    --rack-ok-rgb: 52 211 153;
+    --rack-warn-rgb: 251 191 36;
+    --rack-err-rgb: 251 113 133;
+    --rack-info-rgb: 56 189 248;
+    --rack-patch-rgb: 167 139 250;
+    --rack-opt-rgb: 34 211 238;
+    --rack-neutral-rgb: 212 212 216;
+
+    --rack-accent: #ff5722;
+    --rack-scrollbar-track: #0b0b0c;
+    --rack-scrollbar-thumb: #2b2b30;
+    --rack-backdrop: rgba(0, 0, 0, 0.78);
+  }
+}
+
+:root:has(> head > meta[name='color-scheme'][content='dark']) {
+  color-scheme: dark;
+  --rack-canvas-rgb: 0 0 0;
+  --rack-surface-rgb: 11 11 12;
+  --rack-elevated-rgb: 20 20 22;
+  --rack-hover-rgb: 27 27 30;
+  --rack-border-rgb: 34 34 37;
+  --rack-border-strong-rgb: 52 52 58;
+  --rack-accent-rgb: 255 87 34;
+  --rack-accent-hover-rgb: 255 110 64;
+  --rack-on-accent: #000000;
+  --rack-text-rgb: 244 244 245;
+  --rack-muted-rgb: 148 148 156;
+  --rack-dim-rgb: 92 92 100;
+  --rack-ok-rgb: 52 211 153;
+  --rack-warn-rgb: 251 191 36;
+  --rack-err-rgb: 251 113 133;
+  --rack-info-rgb: 56 189 248;
+  --rack-patch-rgb: 167 139 250;
+  --rack-opt-rgb: 34 211 238;
+  --rack-neutral-rgb: 212 212 216;
+
+  --rack-accent: #ff5722;
+  --rack-scrollbar-track: #0b0b0c;
+  --rack-scrollbar-thumb: #2b2b30;
+  --rack-backdrop: rgba(0, 0, 0, 0.78);
+}
+
+:root:has(> head > meta[name='color-scheme'][content='light']) {
+  color-scheme: light;
 }
 
 html,
@@ -22,8 +102,8 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  background-color: var(--rack-canvas);
-  color: #f4f4f5;
+  background-color: rgb(var(--rack-canvas-rgb));
+  color: rgb(var(--rack-text-rgb));
   box-shadow: none;
 }
 
@@ -50,7 +130,7 @@ dialog:modal {
 }
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.78);
+  background-color: var(--rack-backdrop);
   overflow: hidden;
   overscroll-behavior: contain;
 }
@@ -61,7 +141,7 @@ dialog::backdrop {
 
 /* Accessible high-contrast keyboard focus without shadows */
 :focus-visible {
-  outline: 1px solid #ff5722;
+  outline: 1px solid var(--rack-accent);
   outline-offset: -1px;
 }
 
@@ -75,5 +155,5 @@ dialog::backdrop {
   position: absolute;
   inset-inline: 0;
   inset-block-end: 0;
-  border-block-end: 2px solid #ff5722;
+  border-block-end: 2px solid var(--rack-accent);
 }

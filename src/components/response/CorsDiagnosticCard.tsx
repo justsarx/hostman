@@ -52,7 +52,7 @@ export function CorsDiagnosticCard({ response }: CorsDiagnosticCardProps) {
   if (response.errorType === 'aborted') {
     return (
       <div className="border border-rack-border bg-rack-canvas p-4 font-mono">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rack-warn">
           <Stop size={16} weight="bold" />
           Request Aborted
         </div>
@@ -66,8 +66,8 @@ export function CorsDiagnosticCard({ response }: CorsDiagnosticCardProps) {
 
   if (response.errorType === 'invalid-url') {
     return (
-      <div className="border border-amber-500/40 bg-amber-500/5 p-4 font-mono">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+      <div className="border border-rack-warn/40 bg-rack-warn/5 p-4 font-mono">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rack-warn">
           <Warning size={16} weight="bold" />
           Invalid Target URL
         </div>
@@ -101,9 +101,9 @@ export function CorsDiagnosticCard({ response }: CorsDiagnosticCardProps) {
   };
 
   return (
-    <div className="flex flex-col gap-3 border border-rose-500/40 bg-rack-canvas p-4 font-mono">
+    <div className="flex flex-col gap-3 border border-rack-err/40 bg-rack-canvas p-4 font-mono">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rack-border pb-3">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-400">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rack-err">
           <LinkBreak size={16} weight="bold" />
           {isLocalhost
             ? `Unreachable Local Port or Blocked CORS (${targetHost})`
@@ -165,7 +165,7 @@ export function CorsDiagnosticCard({ response }: CorsDiagnosticCardProps) {
             onClick={handleCopySnippet}
             className="inline-flex items-center gap-1 rounded-[2px] border border-rack-border bg-rack-canvas px-2 py-1 text-[10px] uppercase tracking-wider text-rack-muted hover:border-rack-borderStrong hover:text-rack-text"
           >
-            {copied ? <Check size={12} weight="bold" className="text-emerald-400" /> : <Copy size={12} />}
+            {copied ? <Check size={12} weight="bold" className="text-rack-ok" /> : <Copy size={12} />}
             {copied ? 'Copied' : 'Copy Snippet'}
           </button>
         </div>

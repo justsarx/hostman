@@ -74,7 +74,7 @@ export function SaveRequestModal({
             className="h-8 rounded-[2px] border border-rack-border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text focus:border-rack-accent focus:outline-none"
           />
           {nameError ? (
-            <span id="save-req-name-error" className="font-mono text-[11px] text-rose-400">
+            <span id="save-req-name-error" className="font-mono text-[11px] text-rack-err">
               Error: {nameError}
             </span>
           ) : null}
@@ -128,7 +128,7 @@ export function SaveRequestModal({
               className="h-8 rounded-[2px] border border-rack-border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text focus:border-rack-accent focus:outline-none"
             />
             {colError ? (
-              <span id="save-req-col-error" className="font-mono text-[11px] text-rose-400">
+              <span id="save-req-col-error" className="font-mono text-[11px] text-rack-err">
                 Error: {colError}
               </span>
             ) : null}
@@ -145,7 +145,7 @@ export function SaveRequestModal({
           </button>
           <button
             type="submit"
-            className="h-8 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+            className="h-8 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
           >
             Save
           </button>

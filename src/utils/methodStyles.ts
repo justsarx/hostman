@@ -1,29 +1,26 @@
 import type { HttpMethod } from '../types/api';
 
 export const METHOD_BADGE_STYLES: Record<HttpMethod, string> = {
-  GET: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/5',
-  POST: 'text-amber-400 border-amber-500/40 bg-amber-500/5',
-  PUT: 'text-sky-400 border-sky-500/40 bg-sky-500/5',
-  PATCH: 'text-violet-400 border-violet-500/40 bg-violet-500/5',
-  DELETE: 'text-rose-400 border-rose-500/40 bg-rose-500/5',
-  HEAD: 'text-zinc-300 border-zinc-500/40 bg-zinc-500/5',
-  OPTIONS: 'text-cyan-400 border-cyan-500/40 bg-cyan-500/5',
+  GET: 'text-rack-ok border-rack-ok/40 bg-rack-ok/10',
+  POST: 'text-rack-warn border-rack-warn/40 bg-rack-warn/10',
+  PUT: 'text-rack-info border-rack-info/40 bg-rack-info/10',
+  PATCH: 'text-rack-patch border-rack-patch/40 bg-rack-patch/10',
+  DELETE: 'text-rack-err border-rack-err/40 bg-rack-err/10',
+  HEAD: 'text-rack-neutral border-rack-neutral/40 bg-rack-neutral/10',
+  OPTIONS: 'text-rack-opt border-rack-opt/40 bg-rack-opt/10',
 };
 
 export function getStatusBadgeStyle(status: number): string {
   if (status >= 200 && status < 300) {
-    return 'text-emerald-400 border-emerald-500/50 bg-emerald-500/10';
+    return 'text-rack-ok border-rack-ok/50 bg-rack-ok/10';
   }
   if (status >= 300 && status < 400) {
-    return 'text-sky-400 border-sky-500/50 bg-sky-500/10';
+    return 'text-rack-info border-rack-info/50 bg-rack-info/10';
   }
   if (status >= 400 && status < 500) {
-    return 'text-amber-400 border-amber-500/50 bg-amber-500/10';
+    return 'text-rack-warn border-rack-warn/50 bg-rack-warn/10';
   }
-  if (status >= 500) {
-    return 'text-rose-400 border-rose-500/50 bg-rose-500/10';
-  }
-  return 'text-rose-400 border-rose-500/50 bg-rose-500/10';
+  return 'text-rack-err border-rack-err/50 bg-rack-err/10';
 }
 
 export function formatBytes(bytes: number): string {

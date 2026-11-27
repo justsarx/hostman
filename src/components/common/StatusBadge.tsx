@@ -9,7 +9,7 @@ interface StatusBadgeProps {
 export function StatusBadge({ status, statusText, errorType }: StatusBadgeProps) {
   if (errorType) {
     return (
-      <span className="rounded-[2px] border border-rose-500/50 bg-rose-500/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-rose-400">
+      <span className="rounded-[2px] border border-rack-err/50 bg-rack-err/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-rack-err">
         {errorType}
       </span>
     );

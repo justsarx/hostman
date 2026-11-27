@@ -93,7 +93,7 @@ export function EnvironmentModal({
                   type="button"
                   onClick={() => handleDeleteEnvironment(env.id)}
                   aria-label={`Delete environment ${env.name}`}
-                  className="mr-1 inline-flex h-6 w-6 items-center justify-center text-rack-dim hover:text-rose-400"
+                  className="mr-1 inline-flex h-6 w-6 items-center justify-center text-rack-dim hover:text-rack-err"
                 >
                   <Trash size={12} />
                 </button>
@@ -165,7 +165,7 @@ export function EnvironmentModal({
         <button
           type="button"
           onClick={handleApply}
-          className="h-8 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+          className="h-8 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
         >
           Save Changes
         </button>

@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/react';
 import { KeyValueTable } from '../components/common/KeyValueTable';
 import { useWorkspace } from '../context/useWorkspace';
+import { useColorScheme, type ColorSchemePreference } from '../hooks/useColorScheme';
 import type { Environment, KeyValuePair } from '../types/api';
 import {
   validateEnvironmentForm,
@@ -36,6 +37,7 @@ export function EnvironmentsPage() {
     importWorkspaceFile,
     importStatus,
   } = useWorkspace();
+  const { preference, systemScheme, setSchemePreference } = useColorScheme();
 
   const [selectedEnvId, setSelectedEnvId] = useState<string | null>(
     () => activeEnvId ?? environments[0]?.id ?? null
@@ -192,12 +194,50 @@ export function EnvironmentsPage() {
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex h-8 items-center rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+              className="inline-flex h-8 items-center rounded-[2px] border border-rack-accent bg-rack-accent px-3 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
             >
               Workbench
             </button>
           </div>
         </div>
+
+        {/* Appearance / Theme Preference (Tri-State Control) */}
+        <fieldset className="flex flex-wrap items-center justify-between gap-3 border border-rack-border bg-rack-surface px-4 py-3">
+          <legend className="px-1 font-mono text-[10px] uppercase tracking-wider text-rack-muted">
+            Appearance / Color Scheme
+          </legend>
+          <span className="font-sans text-xs text-rack-muted">
+            Choose Light, Dark, or follow your operating system preference.
+          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            {(
+              [
+                { value: 'system', label: `System (Currently ${systemScheme})` },
+                { value: 'light', label: 'Light' },
+                { value: 'dark', label: 'Dark' },
+              ] as { value: ColorSchemePreference; label: string }[]
+            ).map((option) => (
+              <label
+                key={option.value}
+                className={`inline-flex cursor-pointer items-center gap-1.5 rounded-[2px] border px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider ${
+                  preference === option.value
+                    ? 'border-rack-accent bg-rack-accent/10 text-rack-accent'
+                    : 'border-rack-border bg-rack-elevated text-rack-muted hover:text-rack-text'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="color-scheme-pref"
+                  value={option.value}
+                  checked={preference === option.value}
+                  onChange={() => setSchemePreference(option.value)}
+                  className="h-3.5 w-3.5 cursor-pointer"
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         {importStatus ? (
           <div
@@ -221,7 +261,7 @@ export function EnvironmentsPage() {
             {createdBanner ? (
               <div
                 role="status"
-                className="mt-3 flex items-center gap-2 border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 font-mono text-xs text-emerald-300"
+                className="mt-3 flex items-center gap-2 border border-rack-ok/40 bg-rack-ok/10 px-3 py-2 font-mono text-xs text-rack-ok"
               >
                 <CheckCircle size={15} weight="bold" className="shrink-0" />
                 <span>{createdBanner}</span>
@@ -261,14 +301,14 @@ export function EnvironmentsPage() {
                   placeholder="Staging"
                   className={`h-9 rounded-[2px] border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text placeholder:text-rack-dim focus:outline-none ${
                     errors.name
-                      ? 'border-rose-500 bg-rose-500/5'
+                      ? 'border-rack-err bg-rack-err/5'
                       : 'border-rack-border focus:border-rack-accent'
                   }`}
                 />
                 {errors.name ? (
                   <p
                     id="env-form-name-error"
-                    className="flex items-center gap-1 font-mono text-[11px] text-rose-400"
+                    className="flex items-center gap-1 font-mono text-[11px] text-rack-err"
                   >
                     <WarningCircle size={13} weight="bold" className="shrink-0" />
                     <span>Error: {errors.name}</span>
@@ -305,14 +345,14 @@ export function EnvironmentsPage() {
                   placeholder="https://api.example.com"
                   className={`h-9 rounded-[2px] border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text placeholder:text-rack-dim focus:outline-none ${
                     errors.baseUrl
-                      ? 'border-rose-500 bg-rose-500/5'
+                      ? 'border-rack-err bg-rack-err/5'
                       : 'border-rack-border focus:border-rack-accent'
                   }`}
                 />
                 {errors.baseUrl ? (
                   <p
                     id="env-form-url-error"
-                    className="flex items-center gap-1 font-mono text-[11px] text-rose-400"
+                    className="flex items-center gap-1 font-mono text-[11px] text-rack-err"
                   >
                     <WarningCircle size={13} weight="bold" className="shrink-0" />
                     <span>Error: {errors.baseUrl}</span>
@@ -347,14 +387,14 @@ export function EnvironmentsPage() {
                     placeholder="API_TOKEN"
                     className={`h-8 rounded-[2px] border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text placeholder:text-rack-dim focus:outline-none ${
                       errors.tokenKey
-                        ? 'border-rose-500 bg-rose-500/5'
+                        ? 'border-rack-err bg-rack-err/5'
                         : 'border-rack-border focus:border-rack-accent'
                     }`}
                   />
                   {errors.tokenKey ? (
                     <p
                       id="env-form-key-error"
-                      className="flex items-center gap-1 font-mono text-[11px] text-rose-400"
+                      className="flex items-center gap-1 font-mono text-[11px] text-rack-err"
                     >
                       <WarningCircle size={13} weight="bold" className="shrink-0" />
                       <span>Error: {errors.tokenKey}</span>
@@ -383,14 +423,14 @@ export function EnvironmentsPage() {
                     placeholder="sk_test_12345"
                     className={`h-8 rounded-[2px] border bg-rack-elevated px-2.5 font-mono text-xs text-rack-text placeholder:text-rack-dim focus:outline-none ${
                       errors.tokenValue
-                        ? 'border-rose-500 bg-rose-500/5'
+                        ? 'border-rack-err bg-rack-err/5'
                         : 'border-rack-border focus:border-rack-accent'
                     }`}
                   />
                   {errors.tokenValue ? (
                     <p
                       id="env-form-val-error"
-                      className="flex items-center gap-1 font-mono text-[11px] text-rose-400"
+                      className="flex items-center gap-1 font-mono text-[11px] text-rack-err"
                     >
                       <WarningCircle size={13} weight="bold" className="shrink-0" />
                       <span>Error: {errors.tokenValue}</span>
@@ -417,7 +457,7 @@ export function EnvironmentsPage() {
 
               <button
                 type="submit"
-                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-black hover:bg-rack-accentHover"
+                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-[2px] border border-rack-accent bg-rack-accent px-4 font-mono text-xs font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
               >
                 <Plus size={14} weight="bold" />
                 Create Environment
@@ -447,7 +487,7 @@ export function EnvironmentsPage() {
                     >
                       <span>{env.name}</span>
                       {isActive ? (
-                        <span className="rounded-[2px] bg-emerald-500/20 px-1 py-0.5 text-[9px] font-semibold uppercase text-emerald-300">
+                        <span className="rounded-[2px] bg-rack-ok/20 px-1 py-0.5 text-[9px] font-semibold uppercase text-rack-ok">
                           Active
                         </span>
                       ) : null}
@@ -456,7 +496,7 @@ export function EnvironmentsPage() {
                       type="button"
                       onClick={() => handleDeleteEnv(env.id)}
                       aria-label={`Delete ${env.name}`}
-                      className="mr-1 inline-flex h-6 w-6 items-center justify-center text-rack-dim hover:text-rose-400"
+                      className="mr-1 inline-flex h-6 w-6 items-center justify-center text-rack-dim hover:text-rack-err"
                     >
                       <Trash size={12} />
                     </button>
