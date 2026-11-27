@@ -175,6 +175,7 @@ export function WorkbenchPage() {
 
         <div className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
           <RequestPane
+            key={activeTab.id}
             request={activeTab.request}
             isLoading={activeTab.isLoading}
             activeEnvironment={activeEnvironment}

@@ -17,6 +17,8 @@ export function MockLabPage() {
   const [simulatedResponse, setSimulatedResponse] = useState<ApiResponse | null>(
     MOCK_PRESETS[0].mockResponse
   );
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simRun, setSimRun] = useState<{ count: number; timestamp: string } | null>(null);
 
   const visiblePresets = useMemo(() => {
     if (category === 'ALL') return MOCK_PRESETS;
@@ -29,20 +31,27 @@ export function MockLabPage() {
   );
 
   const handleSimulate = () => {
-    if (selectedPreset.mockResponse) {
+    setIsSimulating(true);
+    window.setTimeout(() => {
+      const base =
+        selectedPreset.mockResponse ??
+        buildSimulatedResponse(
+          selectedPreset.request.method,
+          resolvedUrl,
+          selectedPreset.request.body
+        );
+      const jitterMs = Math.floor(8 + Math.random() * 18);
       setSimulatedResponse({
-        ...selectedPreset.mockResponse,
+        ...base,
+        timeMs: jitterMs,
         targetUrl: resolvedUrl,
       });
-      return;
-    }
-    setSimulatedResponse(
-      buildSimulatedResponse(
-        selectedPreset.request.method,
-        resolvedUrl,
-        selectedPreset.request.body
-      )
-    );
+      setSimRun((prev) => ({
+        count: (prev?.count ?? 0) + 1,
+        timestamp: new Date().toLocaleTimeString(),
+      }));
+      setIsSimulating(false);
+    }, 140);
   };
 
   const handleLoadIntoWorkbench = (preset: MockPreset) => {
@@ -110,6 +119,7 @@ export function MockLabPage() {
                       onClick={() => {
                         setSelectedPreset(preset);
                         setSimulatedResponse(preset.mockResponse);
+                        setSimRun(null);
                       }}
                       className="min-w-0 flex-1 text-left"
                     >
@@ -158,10 +168,11 @@ export function MockLabPage() {
                 <button
                   type="button"
                   onClick={handleSimulate}
-                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent bg-rack-accent px-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover"
+                  disabled={isSimulating}
+                  className="inline-flex h-7 items-center gap-1 rounded-[2px] border border-rack-accent bg-rack-accent px-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-rack-onAccent hover:bg-rack-accentHover disabled:opacity-70"
                 >
                   <Play size={11} weight="fill" />
-                  Simulate
+                  {isSimulating ? 'Simulating...' : 'Simulate'}
                 </button>
                 <button
                   type="button"
@@ -188,6 +199,11 @@ export function MockLabPage() {
                     <span className="text-rack-dim">SIZE </span>
                     {formatBytes(simulatedResponse.sizeBytes)}
                   </span>
+                  {simRun ? (
+                    <span className="rounded-[2px] border border-rack-ok/40 bg-rack-ok/10 px-1.5 py-0.5 text-[10px] font-semibold text-rack-ok">
+                      SIMULATED #{simRun.count} @ {simRun.timestamp}
+                    </span>
+                  ) : null}
                 </div>
 
                 {selectedPreset.request.body ? (
