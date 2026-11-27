@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --rack-canvas: #000000;
+  --rack-surface: #0b0b0c;
+  --rack-elevated: #141416;
+  --rack-border: #222225;
+  --rack-accent: #ff5722;
+  --rack-scrollbar-track: #0b0b0c;
+  --rack-scrollbar-thumb: #2b2b30;
+
+  accent-color: var(--rack-accent);
+  scrollbar-color: var(--rack-scrollbar-thumb) var(--rack-scrollbar-track);
+  scrollbar-width: thin;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background-color: var(--rack-canvas);
+  color: #f4f4f5;
+  box-shadow: none;
+}
+
+/* Legacy scrollbar fallback for engines without scrollbar-color */
+@supports not (scrollbar-color: auto) {
+  * {
+    scrollbar-width: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--rack-scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--rack-scrollbar-thumb);
+  }
+}
+
+/* Native dialog scroll containment */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.78);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Accessible high-contrast keyboard focus without shadows */
+:focus-visible {
+  outline: 1px solid #ff5722;
+  outline-offset: -1px;
+}
+
+/* Selected tab underline indicator using border (forced-colors safe) */
+[role='tab'] {
+  position: relative;
+}
+
+[role='tab'][aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  border-block-end: 2px solid #ff5722;
+}
