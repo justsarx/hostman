@@ -1,14 +1,22 @@
 # Hostman — Lightweight Offline-First API Client
 
-Hostman is a React + TypeScript single-page web application styled in an `#000000` OLED matte hardware-rack aesthetic for inspecting local and remote HTTP APIs directly from the browser.
+Hostman is a React + TypeScript single-page API client built with a high-contrast hardware-rack UI supporting both **Dark (`#000000` OLED)** and **Light** themes, local persistence, and offline PWA capabilities.
+
+**Live Demo:** https://justsarx.me/hostman/  
+**Architecture & Full Function Reference:** See [OVERVIEW.md](./OVERVIEW.md)
 
 ## Features
 
 - **Connected Multi-View Workspace (`react-router-dom`):**
-  - `/` **Workbench:** Collapsible collections/history sidebar, multi-tab request editor, live Fetch execution with `AbortController` cancelation, URL $\leftrightarrow$ Query Params two-way sync, `COPY AS CURL`, `FORMAT JSON`, and CORS / unreachable localhost diagnostics.
+  - `/` **Workbench:** Collapsible collections/history sidebar, multi-tab request editor, live `fetch()` execution with `AbortController` cancellation, URL $\leftrightarrow$ Query Params two-way sync, `COPY AS CURL`, `FORMAT JSON`, and CORS / unreachable localhost diagnostics.
   - `/collections` **Collections & History Explorer:** Searchable, method-filtered directory of saved collections and execution history with one-click reopening into the Workbench.
-  - `/environments` **Environments & Workspace Config:** Client-side validated environment creation form, inline variable matrix editor (`{{BASE_URL}}`, `{{API_TOKEN}}`), and JSON workspace export/import.
+  - `/environments` **Environments & Workspace Config:** Client-side validated environment creation form, tri-state (`System` / `Light` / `Dark`) appearance selector, inline variable matrix editor (`{{BASE_URL}}`, `{{API_TOKEN}}`), and JSON workspace export/import.
   - `/mock-lab` **Offline Mock Lab:** Local simulated endpoint presets (`REST`, `Auth`, `Webhook`) that run completely offline and load directly into Workbench tabs.
+- **Light & Dark Themes:** Follows OS preference by default (`color-scheme: light dark`) with FOUC-free inline initialization, a quick toggle in the top navigation bar, and an explicit 3-state selector on `/environments`.
+- **Keyboard Shortcuts:**
+  - `Ctrl/Cmd + Enter` — Send active request
+  - `Ctrl/Cmd + S` — Save request to collection
+  - `Ctrl/Cmd + K` or `Ctrl/Cmd + L` — Focus and select URL bar
 - **Offline-First Persistence & PWA:** LocalStorage persistence (`mini_postman_v1_*`) with first-boot starter data plus Workbox service worker precaching via `vite-plugin-pwa`.
 
 ## Tech Stack
@@ -54,10 +62,10 @@ src/
 │   ├── modals/          # RackDialog, EnvironmentModal, SaveRequestModal
 │   ├── response/        # CorsDiagnosticCard (Express / FastAPI / Spring Boot)
 │   └── sidebar/         # CollectionsPanel, HistoryPanel
-├── context/             # WorkspaceContext (shared state + localStorage sync)
-├── hooks/               # useShortcuts, useOnlineStatus
+├── context/             # WorkspaceContext & useWorkspace hook
+├── hooks/               # useColorScheme, useShortcuts, useOnlineStatus
 ├── pages/               # WorkbenchPage, CollectionsPage, EnvironmentsPage, MockLabPage
 ├── services/            # httpClient, storageService, mockResponder
 ├── types/               # TypeScript domain interfaces
-└── utils/               # interpolation, urlSync, curlGenerator, importExport, validation
+└── utils/               # interpolation, urlSync, curlGenerator, importExport, validation, methodStyles
 ```
